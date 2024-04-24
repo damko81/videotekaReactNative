@@ -1,10 +1,11 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
-import {useDispatch, useSelector} from 'react-redux';
 import { MovieCard } from '../MovieCard';
-import data from '../../../android/app/src/data/data';
+import { getMovies } from './Action';
 
 export default function Movie() {
+
+    const movies = getMovies();
 
     const [selectedGenre,setSelectedGenre]=useState('all');
     const handleSelectGenre=(genre)=>{
@@ -126,7 +127,7 @@ export default function Movie() {
                         </TouchableOpacity>
                     </View>
                     <View>
-                        {data.map((item)=>(item.genre === selectedGenre || selectedGenre === 'all' ? (<MovieCard item={item}/>):null))}
+                        {movies.map((movie)=>(movie.genre === selectedGenre || selectedGenre === 'all' ? (<MovieCard item={movie}/>):null))}
                     </View>
                 </View>
             </View>
