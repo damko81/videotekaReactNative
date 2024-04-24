@@ -6,7 +6,7 @@ export default function HomeScreen() {
   return (
     <SafeAreaView>
         <View style={styles.container}>
-            <Text style={styles.introText}>Hello, 👋 User Here Is Your VIDEOTECA</Text>
+            <Text style={styles.introText}>Hello, 👋 Here Is Your VIDEOTECA</Text>
         </View>
         <ScrollView>
           <Movie/>
