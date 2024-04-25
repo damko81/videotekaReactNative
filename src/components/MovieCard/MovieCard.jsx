@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import Icon from 'react-native-vector-icons/AntDesign'
 import {useNavigation} from '@react-navigation/native';
@@ -14,6 +14,20 @@ export default function MovieCard({item,type}) {
     global.movies = global.movies.filter(movie => movie.id != id); //Brisanje globalnega seznama FE
     setVisible(false); // skrivanje pobrisanega na enakem tabu
   }
+
+  const deleteDialog = (id) =>
+    Alert.alert(
+      "Confirm Operation",
+      "Are you sure you want to delete this movie?",
+      [{ text: "Cancel",
+         onPress: () => console.log('Cancel Pressed'),
+         style: 'cancel'
+       },
+       { text: "Yes",
+         onPress: () => handleDelete(id)
+       }
+      ]
+  );
  
   return (
     (visible && <View style={[styles.container,styles[`container_${type}`]]}>
@@ -34,7 +48,7 @@ export default function MovieCard({item,type}) {
                       <TouchableOpacity style={styles.edit} onPress={() => {navigation.navigate('UpdateMovie',item);}}>
                           <Icon name="edit" size={24} color="#FBD28B"/>
                       </TouchableOpacity>
-                      <TouchableOpacity onPress={() => handleDelete(item.id)}>
+                      <TouchableOpacity onPress={() => deleteDialog(item.id)}>
                           <Icon name="closecircle" size={24} color="#DE4839"/>
                       </TouchableOpacity>
                   </View>
