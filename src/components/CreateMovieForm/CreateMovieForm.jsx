@@ -9,7 +9,7 @@ export default function CreateMovieForm() {
   const [director,setDirector]=useState('');
   const [stars,setStars]=useState('');
   const [disc,setDisc]=useState('');
-  const [uri,setUri]=useState('');
+  const [uri,setUri]=useState('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==');
   const [duration,setDuration]=useState('');
   const [description,setDescription]=useState('');
   const [selectedGenre,setSelectedGenre]=useState('');
