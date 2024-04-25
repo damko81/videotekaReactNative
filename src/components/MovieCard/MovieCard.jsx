@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import Icon from 'react-native-vector-icons/AntDesign'
 import {useNavigation} from '@react-navigation/native';
 import { deleteMovie } from '../Movie/Action';
@@ -7,37 +7,40 @@ import { deleteMovie } from '../Movie/Action';
 export default function MovieCard({item,type}) {
 
   const navigation = useNavigation();
+  const [visible,setVisible]=useState(true);
 
   const handleDelete=(id)=>{
     deleteMovie(id);
+    global.movies = global.movies.filter(movie => movie.id != id);
+    setVisible(false);
   }
  
   return (
-    <View style={[styles.container,styles[`container_${type}`]]}>
-        <View style={styles.inputView}>
-            <View style={styles.rowContainer}>
-                <Text style={styles.name}>{item.name.substring(0,15)}</Text>
-                <Text style={styles.date}>{item.date}</Text>
-                <Text style={styles.imdb}>{item.rating}</Text>
-                <Text style={styles.duration}>{item.duration}</Text>
-            </View>
-            <View style={styles.rowContainer}>
-                <Text style={styles.disc}>{item.disc}</Text>
-                <Text style={styles.director}>{item.director}</Text>
-                <Text style={styles.stars}>{item.stars.substring(0,15)}</Text>
-            </View>
-        </View>
-        <View>
-            <TouchableOpacity style={styles.edit} onPress={() => {navigation.navigate('UpdateMovie',item);}}>
-                <Icon name="edit" size={24} color="#FBD28B"/>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleDelete(item.id)}>
-                <Icon name="closecircle" size={24} color="#DE4839"/>
-            </TouchableOpacity>
-        </View>
-    </View>
-  )
-
+    (visible && <View style={[styles.container,styles[`container_${type}`]]}>
+                  <View style={styles.inputView}>
+                      <View style={styles.rowContainer}>
+                          <Text style={styles.name}>{item.name.substring(0,15)}</Text>
+                          <Text style={styles.date}>{item.date}</Text>
+                          <Text style={styles.imdb}>{item.rating}</Text>
+                          <Text style={styles.duration}>{item.duration}</Text>
+                      </View>
+                      <View style={styles.rowContainer}>
+                          <Text style={styles.disc}>{item.disc}</Text>
+                          <Text style={styles.director}>{item.director}</Text>
+                          <Text style={styles.stars}>{item.stars.substring(0,15)}</Text>
+                      </View>
+                  </View>
+                  <View>
+                      <TouchableOpacity style={styles.edit} onPress={() => {navigation.navigate('UpdateMovie',item);}}>
+                          <Icon name="edit" size={24} color="#FBD28B"/>
+                      </TouchableOpacity>
+                      <TouchableOpacity onPress={() => handleDelete(item.id)}>
+                          <Icon name="closecircle" size={24} color="#DE4839"/>
+                      </TouchableOpacity>
+                  </View>
+              </View>
+   )
+)
 }
 
 const styles = StyleSheet.create({

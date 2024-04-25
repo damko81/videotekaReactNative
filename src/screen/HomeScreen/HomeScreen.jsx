@@ -1,8 +1,10 @@
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Movie } from '../../components/Movie'
+import { getMovies } from '../../components/Movie/Action';
 
 export default function HomeScreen() {
+  global.movies = getMovies()
   return (
     <SafeAreaView>
         <View style={styles.container}>
@@ -23,7 +25,7 @@ const styles = StyleSheet.create({
          fontSize:16,
          textAlign:"center",
          marginTop:10,
-         borderRadius:5
+         borderRadius:5,
     },
     container:{
       marginHorizontal:10
