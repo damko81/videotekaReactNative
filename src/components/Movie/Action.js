@@ -40,6 +40,46 @@ function createMovieMobile(Movie){
     return movieMobile;
 }
 
+function createMovieBE(Movie){
+
+    var movie = Movie;
+    var genre = movie.genre.toLowerCase();
+    var genreTmp;
+
+    if(genre.includes('sci')){
+        genreTmp='Sci-Fi'; 
+    }
+    else if (genre.includes('hor')){
+        genreTmp='Horror'; 
+    }
+    else if (genre.includes('adv')){
+        genreTmp='Adventure'; 
+    }
+    else if (genre.includes('drm')){
+        genreTmp='Drama'; 
+    }
+    else if (genre.includes('act')){
+        genreTmp='Action'; 
+    }
+
+    const movieBE={
+        id:movie.id,
+        name:movie.name,
+        description:movie.description,
+        rating:movie.rating,
+        director:movie.director,
+        stars:movie.stars,
+        duration:movie.duration,
+        disc:movie.disc,
+        genre:genreTmp,
+        releaseDate:movie.date,
+        url:'',
+        imageSrcDec:'',
+        imageSrc:movie.uri
+    }
+    return movieBE;
+}
+
 function mapMovieParamMobile(movies){
 
     let moviesAndr = [];
@@ -50,6 +90,10 @@ function mapMovieParamMobile(movies){
     });
 
     return moviesAndr;
+}
+
+function mapMovieParamBE(movieData){
+    return createMovieBE(movieData);
 }
 
 export const getMovies = () => {
@@ -67,6 +111,13 @@ export const getMovies = () => {
       }, []);
       moviesAndr = mapMovieParamMobile(movies.sort((a, b) => a.name.localeCompare(b.name)));
       return moviesAndr;
+  };
+
+  export const createMovie = async (movieData) => {
+
+    movie = mapMovieParamBE(movieData);
+    const res= await api.post('/movie/add',movie);
+    return res;
   };
 
   export const deleteMovie = async (id) => {

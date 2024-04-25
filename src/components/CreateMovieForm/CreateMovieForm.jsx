@@ -1,20 +1,22 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import React, { useState } from 'react'
+import { createMovie } from '../Movie/Action';
 
 export default function CreateMovieForm() {
-  const [name,setName]=useState();
-  const [rating,setRating]=useState();
-  const [director,setDirector]=useState();
-  const [stars,setStars]=useState();
-  const [disc,setDisc]=useState();
-  const [duration,setDuration]=useState();
-  const [description,setDescription]=useState();
-  const [selectedGenre,setSelectedGenre]=useState();
+  const [name,setName]=useState('');
+  const [rating,setRating]=useState('');
+  const [director,setDirector]=useState('');
+  const [stars,setStars]=useState('');
+  const [disc,setDisc]=useState('');
+  const [uri,setUri]=useState('');
+  const [duration,setDuration]=useState('');
+  const [description,setDescription]=useState('');
+  const [selectedGenre,setSelectedGenre]=useState('');
   const [mode,setMode]=useState();
   const [show,setShow]=useState();
   const [date,setDate]=useState(new Date());
-  const [dateString,setDateString]=useState();
+  const [dateString,setDateString]=useState('');
 
   const handleInputChange=(key,value)=>{
     if(key=='name')setName(value);
@@ -24,6 +26,7 @@ export default function CreateMovieForm() {
     else if(key=='stars')setStars(value);
     else if(key=='disc')setDisc(value);
     else if(key=='duration')setDuration(value);
+    else if(key=='uri')setUri(value);
   };
   const handleSelectGenre=(genre)=>{
     setSelectedGenre(genre);
@@ -46,6 +49,7 @@ export default function CreateMovieForm() {
     setShow(true);
   }; 
   const handleCreateMovie=()=>{
+
     const movieData={
         name,
         description,
@@ -55,10 +59,13 @@ export default function CreateMovieForm() {
         duration,
         disc,
         genre:selectedGenre,
-        date:date
+        date:dateString,
+        uri
     }
-    console.log(movieData);
-  };  
+    global.movies.push(movieData);
+    createMovie(movieData);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>
@@ -247,6 +254,16 @@ export default function CreateMovieForm() {
                             placeholderTextColor='gray'
                     />
                 </View>
+            </View>
+            <View style={styles.inputWrapper}>
+                <Text style={styles.taskMovie}>URI</Text>
+                <TextInput style={styles.taskMovieInput} 
+                        placeholder='URI' 
+                        name="uri" 
+                        value={uri} 
+                        onChangeText={value=>handleInputChange('uri',value)} 
+                        placeholderTextColor='gray'
+                />
             </View>
             <View style={styles.inputWrapper}>
                 <TouchableOpacity onPress={handleCreateMovie} style={styles.createMovieButton}>

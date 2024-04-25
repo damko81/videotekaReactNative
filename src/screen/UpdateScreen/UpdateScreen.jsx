@@ -58,20 +58,6 @@ import React, { useState } from 'react'
     setMode('date');
     setShow(true);
   }; 
-  const handleCreateMovie=()=>{
-    const movieData={
-        name,
-        description,
-        rating,
-        director,
-        stars,
-        duration,
-        disc,
-        genre:selectedGenre,
-        date:date
-    }
-    console.log(movieData);
-  };  
 
   return (
     <View style={styles.container}>
