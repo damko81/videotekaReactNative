@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'reac
 import DateTimePicker from '@react-native-community/datetimepicker';
 import React, { useState } from 'react'
 
-  function UpdateScreen({route,navigation }) {
+  function UpdateScreen({route}) {
  
   const {name} = route.params;
   const [nameNew,setName]=useState(name);
@@ -330,7 +330,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         marginTop: 1,
-        width:110,
+        width:120,
         paddingVertical: 1,
       },
       starsMovieInput: {
@@ -339,7 +339,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         marginTop: 1,
-        width:200,
+        width:210,
         paddingVertical: 1,
       },
       discMovieInput: {
@@ -392,7 +392,7 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       borderRadius: 5,
       padding: 5,
-      width:80,
+      width:85,
       borderColor: '#3944F7',
     },
     datePicker: {

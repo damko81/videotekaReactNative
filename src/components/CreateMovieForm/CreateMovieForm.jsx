@@ -317,7 +317,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         marginTop: 1,
-        width:110,
+        width:120,
         paddingVertical: 1,
       },
       starsMovieInput: {
@@ -379,7 +379,7 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       borderRadius: 5,
       padding: 5,
-      width:80,
+      width:85,
       borderColor: '#3944F7',
     },
     datePicker: {
@@ -418,7 +418,8 @@ const styles = StyleSheet.create({
         fontWeight:"bold"
     },
     createMovieButton: {
-        backgroundColor:'#1FAA59',
+        backgroundColor:'#1FAA59', 
+        marginLeft:5,
         paddingVertical:15,
         borderRadius:5
     }
