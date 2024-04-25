@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { api } from "../../config/api";
 
 
 function createMovieMobile(Movie){
@@ -24,6 +25,7 @@ function createMovieMobile(Movie){
     }
 
     const movieMobile={
+        id:movie.id,
         name:movie.name,
         description:movie.description,
         rating:movie.rating,
@@ -35,7 +37,6 @@ function createMovieMobile(Movie){
         date:movie.releaseDate,
         uri:movie.imageSrc
     }
-
     return movieMobile;
 }
 
@@ -66,4 +67,9 @@ export const getMovies = () => {
       }, []);
       moviesAndr = mapMovieParamMobile(movies.sort((a, b) => a.name.localeCompare(b.name)));
       return moviesAndr;
+  };
+
+  export const deleteMovie = async (id) => {
+    const res= await api.delete(`/movie/delete/${id}`);
+    return res;
   };

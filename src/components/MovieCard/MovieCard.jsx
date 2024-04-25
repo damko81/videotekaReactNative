@@ -2,13 +2,14 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/AntDesign'
 import {useNavigation} from '@react-navigation/native';
+import { deleteMovie } from '../Movie/Action';
 
 export default function MovieCard({item,type}) {
 
   const navigation = useNavigation();
 
-  const handleDelete=()=>{
-    console.log("delete movie");
+  const handleDelete=(id)=>{
+    deleteMovie(id);
   }
  
   return (
@@ -30,7 +31,7 @@ export default function MovieCard({item,type}) {
             <TouchableOpacity style={styles.edit} onPress={() => {navigation.navigate('UpdateMovie',item);}}>
                 <Icon name="edit" size={24} color="#FBD28B"/>
             </TouchableOpacity>
-            <TouchableOpacity onPress={handleDelete}>
+            <TouchableOpacity onPress={() => handleDelete(item.id)}>
                 <Icon name="closecircle" size={24} color="#DE4839"/>
             </TouchableOpacity>
         </View>
