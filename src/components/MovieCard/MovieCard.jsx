@@ -10,9 +10,9 @@ export default function MovieCard({item,type}) {
   const [visible,setVisible]=useState(true);
 
   const handleDelete=(id)=>{
-    deleteMovie(id);
-    global.movies = global.movies.filter(movie => movie.id != id);
-    setVisible(false);
+    deleteMovie(id); // Brisanje v BE bazi
+    global.movies = global.movies.filter(movie => movie.id != id); //Brisanje globalnega seznama FE
+    setVisible(false); // skrivanje pobrisanega na enakem tabu
   }
  
   return (
