@@ -6,20 +6,21 @@ function createMovieMobile(Movie){
     var movie = Movie;
     var genre = movie.genre.toLowerCase();
     var genreTmp;
-    if(genre.includes('action')){
-        genreTmp='act'; 
+
+    if(genre.includes('sci-fi')){
+        genreTmp='sci'; 
     }
     else if (genre.includes('horror')){
         genreTmp='hor'; 
     }
-    else if (genre.includes('sci-fi')){
-        genreTmp='sci'; 
+    else if (genre.includes('adventure')){
+        genreTmp='adv'; 
     }
     else if (genre.includes('drama')){
         genreTmp='drm'; 
     }
-    else if (genre.includes('adventure')){
-        genreTmp='adv'; 
+    else if (genre.includes('action')){
+        genreTmp='act'; 
     }
 
     const movieMobile={
@@ -63,6 +64,6 @@ export const getMovies = () => {
             setMovies(data);
           });
       }, []);
-      moviesAndr = mapMovieParamMobile(movies);
+      moviesAndr = mapMovieParamMobile(movies.sort((a, b) => a.name.localeCompare(b.name)));
       return moviesAndr;
   };
