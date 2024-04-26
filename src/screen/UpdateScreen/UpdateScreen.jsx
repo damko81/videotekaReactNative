@@ -28,6 +28,7 @@ import React, { useState } from 'react'
 
   const [mode,setMode]=useState();
   const [show,setShow]=useState();
+  const [isReadOnly,setIsReadOnly]=useState(false);
 
   const handleInputChange=(key,value)=>{
     if(key=='name')setName(value);
@@ -59,6 +60,25 @@ import React, { useState } from 'react'
     setShow(true);
   }; 
 
+  const handleUpdateMovie=()=>{
+
+    const movieData={
+        name,
+        description,
+        rating,
+        director,
+        stars,
+        duration,
+        disc,
+        genre:selectedGenre,
+        date:dateString,
+        uri
+    }
+    //updateMovie(movieData); // Shranimo v backend DB.
+    //global.movies.push(movieData); // Na mobile takoj lokalno prikžemo novi objekt.
+    setIsReadOnly(true);
+  };
+
   return (
     <View style={styles.container}>
         <Text style={styles.heading}>
@@ -70,28 +90,37 @@ import React, { useState } from 'react'
             </View>
             <View style={styles.inputWrapper}>
                 <Text style={styles.taskMovie}>Movie Name</Text>
-                <TextInput style={styles.taskMovieInput} 
+                <TextInput style={[ styles.taskMovieInput,
+                                    {backgroundColor:isReadOnly?'#758AA2':'#00000000'}
+                                  ]
+                                 }  
                             placeholder='Name' 
                             name="name" 
                             value={nameNew} 
                             onChangeText={value=>handleInputChange('name',value)} 
                             placeholderTextColor='gray'
+                            readOnly={isReadOnly}
                 />
             </View>
             <View style={styles.inputWrapper}>
                 <Text style={styles.taskMovie}>Movie Description</Text>
-                <TextInput style={styles.taskMovieInput} 
-                       placeholder='Description' 
-                       name="description" 
-                       value={descriptionNew} 
-                       onChangeText={value=>handleInputChange('description',value)} 
-                       placeholderTextColor='gray'
+                <TextInput style={[ styles.taskMovieInput,
+                                    {backgroundColor:isReadOnly?'#758AA2':'#00000000'}
+                                  ]
+                                 }
+                           placeholder='Description' 
+                           name="description" 
+                           value={descriptionNew} 
+                           onChangeText={value=>handleInputChange('description',value)} 
+                           placeholderTextColor='gray'
+                           readOnly={isReadOnly}
                 />
             </View>
             <View style={styles.inputWrapper}>
             <Text style={styles.taskMovie}>Select Genre</Text>
             <View style={styles.genreContainer}>
                 <TouchableOpacity 
+                    disabled={isReadOnly}
                     onPress={()=>handleSelectGenre('sci')}
                     style={[
                         styles.button,
@@ -110,6 +139,7 @@ import React, { useState } from 'react'
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
+                    disabled={isReadOnly}
                     onPress={()=>handleSelectGenre('hor')}
                     style={[
                         styles.button,
@@ -128,6 +158,7 @@ import React, { useState } from 'react'
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
+                    disabled={isReadOnly}
                     onPress={()=>handleSelectGenre('act')}
                     style={[
                         styles.button,
@@ -146,6 +177,7 @@ import React, { useState } from 'react'
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
+                    disabled={isReadOnly}
                     onPress={()=>handleSelectGenre('adv')}
                     style={[
                         styles.button,
@@ -164,6 +196,7 @@ import React, { useState } from 'react'
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
+                    disabled={isReadOnly}
                     onPress={()=>handleSelectGenre('drm')}
                     style={[
                         styles.button,
@@ -186,7 +219,7 @@ import React, { useState } from 'react'
             <View style={styles.deadlineButton}>
                 <View style={styles.inputWrapper}>
                     <Text style={styles.taskMovie}>Date</Text>
-                    <TouchableOpacity onPress={()=>handleOpenDateTimePicker()} style={styles.datePickerButton}>
+                    <TouchableOpacity disabled={isReadOnly} onPress={()=>handleOpenDateTimePicker()} style={[styles.datePickerButton,{backgroundColor:isReadOnly?'#758AA2':'#00000000'}]}>
                         {!show && dateNew && <Text style={styles.datePicker}>{dateString}</Text>}
                     </TouchableOpacity>        
                     {show && (
@@ -201,56 +234,68 @@ import React, { useState } from 'react'
                 </View>
                 <View style={styles.inputWrapper}>
                     <Text style={styles.taskMovie}>Rating</Text>
-                    <TextInput style={styles.ratingMovieInput} 
+                    <TextInput style={[styles.ratingMovieInput,{backgroundColor:isReadOnly?'#758AA2':'#00000000'}]} 
                             placeholder='Rating' 
                             name="rating" 
                             value={ratingNew} 
                             onChangeText={value=>handleInputChange('rating',value)} 
                             placeholderTextColor='gray'
+                            readOnly={isReadOnly}
                     />
                 </View>
                 <View style={styles.inputWrapper}>
                     <Text style={styles.taskMovie}>Duration</Text>
-                    <TextInput style={styles.durationMovieInput} 
+                    <TextInput style={[styles.durationMovieInput,{backgroundColor:isReadOnly?'#758AA2':'#00000000'}]} 
                             placeholder='Duration' 
                             name="duration" 
                             value={durationNew} 
                             onChangeText={value=>handleInputChange('duration',value)} 
                             placeholderTextColor='gray'
+                            readOnly={isReadOnly}
                     />
                 </View>
                 <View style={styles.inputWrapper}>
                     <Text style={styles.taskMovie}>Disc</Text>
-                    <TextInput style={styles.discMovieInput} 
+                    <TextInput style={[styles.discMovieInput,{backgroundColor:isReadOnly?'#758AA2':'#00000000'}]} 
                             placeholder='Disc' 
                             name="disc" 
                             value={discNew} 
                             onChangeText={value=>handleInputChange('disc',value)} 
                             placeholderTextColor='gray'
+                            readOnly={isReadOnly}
                     />
                 </View>
             </View>
             <View style={styles.deadlineButton}>
                 <View style={styles.inputWrapper}>
                     <Text style={styles.taskMovie}>Director</Text>
-                    <TextInput style={styles.directorMovieInput} 
+                    <TextInput style={[styles.directorMovieInput,{backgroundColor:isReadOnly?'#758AA2':'#00000000'}]} 
                             placeholder='Director' 
                             name="director" 
                             value={directorNew} 
                             onChangeText={value=>handleInputChange('director',value)} 
                             placeholderTextColor='gray'
+                            readOnly={isReadOnly}
                     />
                 </View>
                 <View style={styles.inputWrapper}>
                     <Text style={styles.taskMovie}>Stars</Text>
-                    <TextInput style={styles.starsMovieInput} 
+                    <TextInput style={[styles.starsMovieInput,{backgroundColor:isReadOnly?'#758AA2':'#00000000'}]}  
                             placeholder='Stars' 
                             name="stars" 
                             value={starsNew} 
                             onChangeText={value=>handleInputChange('stars',value)} 
                             placeholderTextColor='gray'
+                            readOnly={isReadOnly}
                     />
                 </View>
+            </View>
+            <View style={styles.inputWrapper}>
+                <TouchableOpacity disabled={isReadOnly} onPress={handleUpdateMovie} style={[styles.updateMovieButton,{backgroundColor:isReadOnly?'#758AA2':'#1FAA59'}]}>
+                    <Text style={styles.updateMovieButtonText}>
+                        {isReadOnly?'MOVIE SUCCESSFULLY UPDATED':'UPDATE MOVIE'}
+                    </Text>
+                </TouchableOpacity>
             </View>
         </View>
     </View>       
@@ -411,12 +456,12 @@ const styles = StyleSheet.create({
       borderRadius: 5,
       borderWidth: 1,
     },
-    createMovieButtonText: {
+    updateMovieButtonText: {
         color:'white',
         textAlign:'center',
         fontWeight:"bold"
     },
-    createMovieButton: {
+    updateMovieButton: {
         backgroundColor:'#1FAA59',
         paddingVertical:15,
         borderRadius:5
