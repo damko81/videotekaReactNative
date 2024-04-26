@@ -5,7 +5,7 @@ import { api } from "../../config/api";
 function createMovieMobile(Movie){
 
     var movie = Movie;
-    var genre = movie.genre.toLowerCase();
+    var genre = movie.genre === null ? '': movie.genre.toLowerCase();
     var genreTmp;
 
     if(genre.includes('sci-fi')){
@@ -43,8 +43,8 @@ function createMovieMobile(Movie){
 function createMovieBE(Movie){
 
     var movie = Movie;
-    var genre = movie.genre.toLowerCase();
-    var genreTmp;
+    var genre = movie.genre === null ? '': movie.genre.toLowerCase();
+    var genreTmp='';
 
     if(genre.includes('sci')){
         genreTmp='Sci-Fi'; 

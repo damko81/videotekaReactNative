@@ -6,7 +6,6 @@ import { getMovies } from '../../components/Movie/Action';
 export default function HomeScreen() {
 
   global.movies = getMovies() // Globalna spremenljivka seznama filmov, ki bomo iz različnih component urejalli.
-  
   return (
     <SafeAreaView>
         <View style={styles.container}>
