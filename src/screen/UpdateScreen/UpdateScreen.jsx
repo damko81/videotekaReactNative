@@ -1,9 +1,11 @@
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import React, { useState } from 'react'
+import { updateMovie } from '../../components/Movie/Action';
 
   function UpdateScreen({route}) {
  
+  const {id,setId} = route.params;  
   const {name} = route.params;
   const [nameNew,setName]=useState(name);
   const {rating} = route.params;
@@ -63,19 +65,22 @@ import React, { useState } from 'react'
   const handleUpdateMovie=()=>{
 
     const movieData={
-        name,
-        description,
-        rating,
-        director,
-        stars,
-        duration,
-        disc,
+        id,
+        name:nameNew,
+        description:descriptionNew,
+        rating:ratingNew,
+        director:directorNew,
+        stars:starsNew,
+        duration:durationNew,
+        disc:discNew,
         genre:selectedGenre,
         date:dateString,
-        uri
+        uri:uriNew
     }
-    //updateMovie(movieData); // Shranimo v backend DB.
-    //global.movies.push(movieData); // Na mobile takoj lokalno prikžemo novi objekt.
+
+    updateMovie(movieData); // Shranimo v backend DB.
+    global.movies = global.movies.filter(movie => movie.id != id); //Brisanje globalnega seznama FE
+    global.movies.push(movieData); // Na mobile takoj lokalno prikžemo novi objekt.
     setIsReadOnly(true);
   };
 

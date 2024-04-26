@@ -113,6 +113,13 @@ export const getMovies = () => {
       return moviesAndr;
   };
 
+  export const updateMovie = async (movieData) => {
+
+    movie = mapMovieParamBE(movieData);
+    const res= await api.put('/movie/update',movie);
+    return res;
+  };
+
   export const createMovie = async (movieData) => {
 
     movie = mapMovieParamBE(movieData);
@@ -124,3 +131,5 @@ export const getMovies = () => {
     const res= await api.delete(`/movie/delete/${id}`);
     return res;
   };
+
+  
