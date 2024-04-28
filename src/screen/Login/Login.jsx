@@ -6,7 +6,7 @@ import {
     TouchableOpacity,
     StyleSheet,
   } from 'react-native';
-import {Formik} from 'formik';
+import {Formik,useFormik} from 'formik';
 import * as Yup from 'yup'; 
 import {useDispatch, useSelector} from 'react-redux';
 import { signInUser } from './Action';
@@ -24,7 +24,8 @@ const validationSchema = Yup.object().shape({
     //const dispatch = useDispatch();
     
     const handleLogin = values => {
-      
+        console.log('Dela');
+        //signInUser(values);
       //dispatch(signInUser(values));
     };
     
@@ -42,7 +43,7 @@ const validationSchema = Yup.object().shape({
             styles.input,
             touched.username && errors.username && styles.inputError,
           ]}
-          placeholder="username"
+          placeholder="Username"
           onChangeText={handleChange('username')}
           onBlur={handleBlur('username')}
           value={values.username}
