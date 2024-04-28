@@ -89,7 +89,7 @@ const validationSchema = Yup.object().shape({
             </View>
             <View style={styles.signup}>
               <Text style={styles.accountText}>
-                VIDEOTECA as nonregistered{' '}
+                Go as nonregistered user: {' '}
               </Text>
               <TouchableOpacity
                 onPress={() => navigation.navigate('Home')}
