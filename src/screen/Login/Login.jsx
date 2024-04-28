@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
     View,
     TextInput,
@@ -6,14 +6,12 @@ import {
     TouchableOpacity,
     StyleSheet,
   } from 'react-native';
-import {Formik,useFormik} from 'formik';
+import {Formik} from 'formik';
 import * as Yup from 'yup'; 
-import {useDispatch, useSelector} from 'react-redux';
 import { signInUser } from './Action';
 
 const validationSchema = Yup.object().shape({
-    username: Yup.string().min(6, 'Username must be at least 6 characters').required('Username is required'),
-    email: Yup.string().email('Invalid email').required('Email is required'),
+    username: Yup.string().min(5, 'Username must be at least 5 characters').required('Username is required'),
     password: Yup.string()
       .min(6, 'Password must be at least 6 characters')
       .required('Password is required'),
@@ -21,12 +19,8 @@ const validationSchema = Yup.object().shape({
 
   const LoginForm = ({navigation}) => {
 
-    //const dispatch = useDispatch();
-    
     const handleLogin = values => {
-        console.log('Dela');
-        //signInUser(values);
-      //dispatch(signInUser(values));
+        signInUser(values);
     };
     
     const renderForm = ({

@@ -1,7 +1,7 @@
 import { api } from "../../config/api";
 
 // singin user
-export const signInUser = reqData => async dispatch => {
+export const signInUser = async reqData => {
     try {
      
             const response = await api.post('/users/login', reqData);
@@ -11,17 +11,13 @@ export const signInUser = reqData => async dispatch => {
             console.log('Name:' + name);
             console.log('password:' + password);
 
-            dispatch('LOGIN_SUCCESS');
- 
     } catch (error) {
       console.error('Error signing in user:', error,reqData);
-      dispatch('LOGIN_ERR');
     }
   };
 
-  export const logoutUserAction = () => async dispatch => {
+  export const logoutUserAction = () => {
   
-    dispatch({type:LOGOUT_SUCCESS});
     console.log('logout user');
   
   };
