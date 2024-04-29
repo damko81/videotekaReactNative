@@ -1,11 +1,12 @@
 import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/AntDesign'
-import { getUsername } from '../Login/Action';
+import { getUsername, logoutUserAction } from '../Login/Action';
 
-export default function ProfileScreen() {
+export default function ProfileScreen({navigation}) {
 
-  const [username,setUsername]=useState("username");
+  const [username,setUsername]=useState();
+  const [isUserLogedIn,setIsUserLogedIn]=useState(false);
   const [isEditeUsername,setIsEditUsername]=useState(false);
   const selectImageFromLibrary=()=>{}
   const updateUsername=()=>{
@@ -15,10 +16,20 @@ export default function ProfileScreen() {
   useEffect( () => {
     (async()=>{
         var text=await getUsername();
-        setUsername(text);  
+        setUsername(text);
+        setIsUserLogedIn(text===undefined?false:true);
     })()
 }, [])
-  
+
+ const handleLogout=()=>{
+   logoutUserAction();
+   setUsername("username");
+   navigation.navigate('Login');
+ }
+ const handleLogin=()=>{
+  navigation.navigate('Login');
+}
+
   return (
             <ScrollView>
               <View style={{alignItems:'center',marginTop:20}}>
@@ -38,15 +49,31 @@ export default function ProfileScreen() {
                         />
                       )
                       :
-                      ( <View style={{flexDirection:'row', alignItems:'center',paddingVertical:20}}>
+                      (<View style={{flexDirection:'row', alignItems:'center',paddingVertical:20}}>
                           <Text style={{fontSize:20,fontWeight:'500', color:'black', marginRight:10}}>{username}</Text>
+                          {isUserLogedIn &&
                           <TouchableOpacity onPress={()=>setIsEditUsername(true)}>
                             <Icon name="edit" size={24} color="#120E43"/>
                           </TouchableOpacity>
+                          }
                         </View> 
                       )  
                     }
                   </View>
+                  {isUserLogedIn &&
+                    <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
+                      <Text style={styles.logoutText}>
+                        Logout
+                      </Text>
+                    </TouchableOpacity>
+                  }
+                  {!isUserLogedIn &&
+                    <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
+                      <Text style={styles.logoutText}>
+                        Login
+                      </Text>
+                    </TouchableOpacity>
+                  }
               </View>
             </ScrollView>
          )
@@ -93,6 +120,16 @@ const styles = StyleSheet.create({
   },
   inProgressTaskDetail: {
     backgroundColor: 'orange',
+  },
+  loginButton:{
+    backgroundColor: '#120E43',
+    padding:20,
+    borderRadius:5,
+    width:'100%',
+    margin:10,
+    // position:"absolute",
+    bottom:0
+
   },
   logoutButton:{
     backgroundColor:'#E6425E',

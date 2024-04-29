@@ -1,5 +1,4 @@
 import React from 'react';
-import * as Keychain from 'react-native-keychain';
 import {
     View,
     TextInput,
@@ -22,6 +21,7 @@ const validationSchema = Yup.object().shape({
 
     const handleLogin = values => {
         signInUser(values);
+        navigation.navigate('Home');
     };
     
     const renderForm = ({
