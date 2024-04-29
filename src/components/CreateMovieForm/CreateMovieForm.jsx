@@ -1,7 +1,8 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createMovie } from '../Movie/Action';
+import { getUsername } from '../../screen/Login/Action';
 
 export default function CreateMovieForm() {
   const [name,setName]=useState('');
@@ -18,6 +19,15 @@ export default function CreateMovieForm() {
   const [date,setDate]=useState(new Date());
   const [dateString,setDateString]=useState('');
   const [isReadOnly,setIsReadOnly]=useState(false);
+  const [isUserLogedIn,setIsUserLogedIn]=useState(false);
+
+  useEffect( () => {
+    (async()=>{
+        var text=await getUsername();
+        setIsUserLogedIn(text===undefined?false:true);
+        setIsReadOnly(text===undefined?true:false);
+    })()
+}, [])
 
   const handleInputChange=(key,value)=>{
     if(key=='name')setName(value);
@@ -289,7 +299,7 @@ export default function CreateMovieForm() {
             <View style={styles.inputWrapper}>
                 <TouchableOpacity disabled={isReadOnly} onPress={handleCreateMovie} style={[styles.createMovieButton,{backgroundColor:isReadOnly?'#758AA2':'#1FAA59'}]}>
                     <Text style={styles.createMovieButtonText}>
-                        {isReadOnly?'MOVIE SUCCESSFULLY CREATED':'CREATE MOVIE'}
+                        {isReadOnly && isUserLogedIn?'MOVIE SUCCESSFULLY CREATED':'CREATE MOVIE'}
                     </Text>
                 </TouchableOpacity>
             </View>
