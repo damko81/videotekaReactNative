@@ -1,7 +1,8 @@
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { updateMovie } from '../../components/Movie/Action';
+import { getUsername } from '../Login/Action';
 
   function UpdateScreen({route}) {
  
@@ -31,6 +32,15 @@ import { updateMovie } from '../../components/Movie/Action';
   const [mode,setMode]=useState();
   const [show,setShow]=useState();
   const [isReadOnly,setIsReadOnly]=useState(false);
+  const [isUserLogedIn,setIsUserLogedIn]=useState(false);
+
+  useEffect( () => {
+    (async()=>{
+        var text=await getUsername();
+        setIsUserLogedIn(text===undefined?false:true);
+        setIsReadOnly(text===undefined?true:false);
+    })()
+}, [])
 
   const handleInputChange=(key,value)=>{
     if(key=='name')setName(value);
@@ -298,7 +308,7 @@ import { updateMovie } from '../../components/Movie/Action';
             <View style={styles.inputWrapper}>
                 <TouchableOpacity disabled={isReadOnly} onPress={handleUpdateMovie} style={[styles.updateMovieButton,{backgroundColor:isReadOnly?'#758AA2':'#1FAA59'}]}>
                     <Text style={styles.updateMovieButtonText}>
-                        {isReadOnly?'MOVIE SUCCESSFULLY UPDATED':'UPDATE MOVIE'}
+                        {isReadOnly && isUserLogedIn?'MOVIE SUCCESSFULLY UPDATED':'UPDATE MOVIE'}
                     </Text>
                 </TouchableOpacity>
             </View>
