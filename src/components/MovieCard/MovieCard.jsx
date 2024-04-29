@@ -1,13 +1,22 @@
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/AntDesign'
 import {useNavigation} from '@react-navigation/native';
 import { deleteMovie } from '../Movie/Action';
+import { getUsername } from '../../screen/Login/Action';
 
 export default function MovieCard({item,type}) {
 
   const navigation = useNavigation();
   const [visible,setVisible]=useState(true);
+  const [isUserLogedIn,setIsUserLogedIn]=useState(false);
+
+  useEffect( () => {
+    (async()=>{
+        var text=await getUsername();
+        setIsUserLogedIn(text===undefined?false:true);
+    })()
+}, [])
 
   const handleDelete=(id)=>{
     deleteMovie(id); // Brisanje v BE bazi
@@ -48,8 +57,8 @@ export default function MovieCard({item,type}) {
                       <TouchableOpacity style={styles.edit} onPress={() => {navigation.navigate('UpdateMovie',item);}}>
                           <Icon name="edit" size={24} color="#FBD28B"/>
                       </TouchableOpacity>
-                      <TouchableOpacity onPress={() => deleteDialog(item.id)}>
-                          <Icon name="closecircle" size={24} color="#DE4839"/>
+                      <TouchableOpacity disabled={!isUserLogedIn} onPress={() => deleteDialog(item.id)}>
+                          <Icon name="closecircle" size={24} style={{color:isUserLogedIn?'#DE4839':'#758AA2'}}/>
                       </TouchableOpacity>
                   </View>
               </View>
