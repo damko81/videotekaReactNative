@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Keychain from 'react-native-keychain';
 import {
     View,
     TextInput,

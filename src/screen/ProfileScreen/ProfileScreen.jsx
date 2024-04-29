@@ -1,14 +1,24 @@
 import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/AntDesign'
+import { getUsername } from '../Login/Action';
 
 export default function ProfileScreen() {
+
   const [username,setUsername]=useState("username");
   const [isEditeUsername,setIsEditUsername]=useState(false);
   const selectImageFromLibrary=()=>{}
   const updateUsername=()=>{
         setIsEditUsername(false);
   }
+
+  useEffect( () => {
+    (async()=>{
+        var text=await getUsername();
+        setUsername(text);  
+    })()
+}, [])
+  
   return (
             <ScrollView>
               <View style={{alignItems:'center',marginTop:20}}>
