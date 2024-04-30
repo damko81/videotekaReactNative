@@ -1,6 +1,18 @@
 import { api } from "../../config/api";
 import * as Keychain from 'react-native-keychain';
 
+export const signUpUser = async reqData => {
+    try {
+
+      const response = await api.post('/users/save', reqData);
+      //console.log(response.data);
+
+    } catch (error) {
+      console.error('Error signing up user:', error);
+    }
+};
+
+
 // singin user
 export const signInUser = async reqData => {
     try {
