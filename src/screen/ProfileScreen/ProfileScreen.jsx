@@ -38,14 +38,11 @@ export default function ProfileScreen({navigation}) {
  }
  const handleUpdate=()=>{
   
-  if(newPassword != null || newPassword != ''){
-    setPassword(newPassword);
-  }
   var values = {
                   id:id,
                   name:name,
                   username:username,
-                  password:password
+                  password:(newPassword != null || newPassword != '')?newPassword:password
                };
 
   updateUserAction(values);
