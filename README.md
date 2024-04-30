@@ -34,6 +34,9 @@ SignUp new user:
 
 ![image](https://github.com/damko81/videotekaReactNative/assets/162964541/8376ba17-0d83-4c85-a0f9-f4d329b597fd)
 
+Managing user profil:
+
+![image](https://github.com/damko81/videotekaReactNative/assets/162964541/ce0325ae-e411-461a-9b45-dcc849fa8dc0)
 
 
 
