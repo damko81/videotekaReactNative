@@ -22,9 +22,12 @@ export const signInUser = async reqData => {
             // Store the credentials
             await Keychain.setGenericPassword(username, password,{service:"userCredentials"});
             await Keychain.setGenericPassword(name, JSON.stringify(id),{service:"userAdditional"});
+
+            return true;
           
     } catch (error) {
       console.error('Error signing in user:', error,reqData);
+      return false;
     }
   };
 

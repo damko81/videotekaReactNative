@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     View,
     TextInput,
@@ -19,9 +19,13 @@ const validationSchema = Yup.object().shape({
 
   const LoginForm = ({navigation}) => {
 
-    const handleLogin = values => {
-        signInUser(values);
-        navigation.navigate('Home');
+    var isValidLogin = false;
+
+    const handleLogin = async values => {
+        isValidLogin = await signInUser(values);
+        if(isValidLogin){
+          navigation.navigate('Home');
+        }
     };
     
     const renderForm = ({
@@ -61,7 +65,9 @@ const validationSchema = Yup.object().shape({
         {touched.password && errors.password && (
           <Text style={styles.error}>{errors.password}</Text>
         )}
-  
+         {!isValidLogin && (
+          <Text style={styles.error}>Incorrect Username or Password</Text>
+        )}
         <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
