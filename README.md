@@ -4,6 +4,10 @@ Login page:
 
 ![image](https://github.com/damko81/videotekaReactNative/assets/162964541/094afb86-ef5b-46c9-857f-54879b4eb8db)
 
+You can go to Videoteca list as nonregistered user with readonly actions:
+
+![image](https://github.com/damko81/videotekaReactNative/assets/162964541/3da2a1dd-4e04-46a8-9f1c-e5e25a9dcec5)
+
 
 List of movies:
 
