@@ -1,7 +1,7 @@
 import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/AntDesign'
-import { getId, getName, getPassword, getUsername, logoutUserAction } from '../Login/Action';
+import { getId, getName, getPassword, getUsername, logoutUserAction, updateUserAction } from '../Login/Action';
 
 export default function ProfileScreen({navigation}) {
 
@@ -9,6 +9,7 @@ export default function ProfileScreen({navigation}) {
   const [name,setName]=useState();
   const [username,setUsername]=useState();
   const [password,setPassword]=useState();
+  const [newPassword,setNewPassword]=useState(null);
   const [isUserLogedIn,setIsUserLogedIn]=useState(false);
   const [isEditeUsername,setIsEditUsername]=useState(false);
   const selectImageFromLibrary=()=>{}
@@ -35,6 +36,21 @@ export default function ProfileScreen({navigation}) {
    setUsername("username");
    navigation.navigate('Login');
  }
+ const handleUpdate=()=>{
+  
+  if(newPassword != null || newPassword != ''){
+    setPassword(newPassword);
+  }
+  var values = {
+                  id:id,
+                  name:name,
+                  username:username,
+                  password:password
+               };
+
+  updateUserAction(values);
+  handleLogout();
+}
  const handleLogin=()=>{
   navigation.navigate('Login');
 }
@@ -54,7 +70,6 @@ export default function ProfileScreen({navigation}) {
                                value={username} 
                                onChangeText={text=>setUsername(text)} 
                                autoFocus
-                               onBlur={updateUsername}
                         />
                       )
                       :
@@ -69,7 +84,34 @@ export default function ProfileScreen({navigation}) {
                       )  
                     }
                   </View>
-                  {isUserLogedIn &&
+                  {isEditeUsername &&
+                    <View>
+                       <TextInput 
+                               style={{fontSize:16}} 
+                               placeholder='Enter your Full Name' 
+                               value={name} 
+                               onChangeText={text=>setName(text)} 
+                        />
+                    </View>
+                  }
+                   {isEditeUsername &&
+                    <View>
+                       <TextInput 
+                               style={{fontSize:16}} 
+                               placeholder='Enter Your New Password' 
+                               value={newPassword} 
+                               onChangeText={text=>setNewPassword(text)} 
+                        />
+                    </View>
+                  }
+                  {isUserLogedIn && isEditeUsername &&
+                    <TouchableOpacity onPress={handleUpdate} style={styles.logoutButton}>
+                      <Text style={styles.logoutText}>
+                        Update
+                      </Text>
+                    </TouchableOpacity>
+                  }
+                  {isUserLogedIn && !isEditeUsername &&
                     <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
                       <Text style={styles.logoutText}>
                         Logout

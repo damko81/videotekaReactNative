@@ -27,6 +27,17 @@ export const signInUser = async reqData => {
       console.error('Error signing in user:', error,reqData);
     }
   };
+
+// update user
+export const updateUserAction = async reqData => {
+  try {
+          const response = await api.put('/users/update', reqData);
+          const {id, name, password,username} = response.data;
+         
+  } catch (error) {
+    console.error('Error update in user:', error,reqData);
+  }
+};  
   
 export const getUsername = async () => {
     try {
