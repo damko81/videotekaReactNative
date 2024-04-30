@@ -8,13 +8,13 @@ You can go to Videoteca list as nonregistered user with readonly actions - grey 
 
 ![image](https://github.com/damko81/videotekaReactNative/assets/162964541/3da2a1dd-4e04-46a8-9f1c-e5e25a9dcec5)
 
-Show form (all grey):
+Show form:
 
 ![image](https://github.com/damko81/videotekaReactNative/assets/162964541/b7821cd5-93b2-4b94-a198-f93941b7b3a5)
 
-List of movies:
+As Loged user can use writeble actions:
 
-![image](https://github.com/damko81/videotekaReactNative/assets/162964541/f8f5c98d-1893-41f0-ab0a-010e9ae8d3db)
+![image](https://github.com/damko81/videotekaReactNative/assets/162964541/66fd0fbb-a52a-4205-865e-8502b6db3523)
 
 Create new movie:
 
