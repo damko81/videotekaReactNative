@@ -21,13 +21,20 @@ Create new movie:
 ![image](https://github.com/damko81/videotekaReactNative/assets/162964541/40212cf2-8c9c-4a95-95dc-4f4e7b7b5665)
 
 
-Show/Update movie:
+Update movie:
 
-![image](https://github.com/damko81/videotekaReactNative/assets/162964541/a3b9bdce-0dab-4f60-9aa5-517c3513bbf5)
+![image](https://github.com/damko81/videotekaReactNative/assets/162964541/60cc6307-7e75-4e60-bb54-88082972af2c)
 
-Login:
 
-![image](https://github.com/damko81/videotekaReactNative/assets/162964541/1c359fe9-2787-4de0-b713-e4e5507d7e2c)
+Delete:
+
+![image](https://github.com/damko81/videotekaReactNative/assets/162964541/43b343e1-c765-4840-ad74-2d3aebe43a32)
+
+SignUp new user:
+
+![image](https://github.com/damko81/videotekaReactNative/assets/162964541/8376ba17-0d83-4c85-a0f9-f4d329b597fd)
+
+
 
 
 
