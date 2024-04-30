@@ -11,11 +11,15 @@ import * as Yup from 'yup';
 import { signUpUser } from '../Login/Action';
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().min(5, 'FullName must be at least 5 characters').required('FullName is required'),
-  username: Yup.string().min(5, 'Username must be at least 5 characters').required('Username is required'),
+  name: Yup.string().min(3, 'FullName must be at least 5 characters').required('FullName is required'),
+  username: Yup.string().min(3, 'Username must be at least 5 characters').required('Username is required'),
   password: Yup.string()
     .min(6, 'Password must be at least 6 characters')
     .required('Password is required'),
+  passwordConfirmation: Yup.string()
+    .test('passwords-match', 'Passwords must match', function(value){
+      return this.parent.password === value
+    }),  
 });
 
 const Register = ({navigation}) => {
@@ -77,6 +81,21 @@ const Register = ({navigation}) => {
         <Text style={styles.error}>{errors.password}</Text>
       )}
 
+      <TextInput
+        style={[
+          styles.input,
+          touched.passwordConfirmation && errors.passwordConfirmation && styles.inputError,
+        ]}
+        placeholder="PasswordConfirmation"
+        secureTextEntry
+        onChangeText={handleChange('passwordConfirmation')}
+        onBlur={handleBlur('passwordConfirmation')}
+        value={values.passwordConfirmation}
+      />
+      {touched.passwordConfirmation && errors.passwordConfirmation && (
+        <Text style={styles.error}>{errors.passwordConfirmation}</Text>
+      )}
+
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
@@ -88,7 +107,7 @@ const Register = ({navigation}) => {
               <View style={styles.box}>
                 <Text style={styles.heading}>Manage Your Videoteca</Text>
                 <Formik
-                  initialValues={{name: '', username: '', password: ''}}
+                  initialValues={{name: '', username: '', password: '', passwordConfirmation: ''}}
                   validationSchema={validationSchema}
                   onSubmit={handleRegister}>
                   {renderForm}
