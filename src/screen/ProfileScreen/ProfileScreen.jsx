@@ -1,11 +1,14 @@
 import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/AntDesign'
-import { getUsername, logoutUserAction } from '../Login/Action';
+import { getId, getName, getPassword, getUsername, logoutUserAction } from '../Login/Action';
 
 export default function ProfileScreen({navigation}) {
 
+  const [id,setId]=useState();
+  const [name,setName]=useState();
   const [username,setUsername]=useState();
+  const [password,setPassword]=useState();
   const [isUserLogedIn,setIsUserLogedIn]=useState(false);
   const [isEditeUsername,setIsEditUsername]=useState(false);
   const selectImageFromLibrary=()=>{}
@@ -18,6 +21,12 @@ export default function ProfileScreen({navigation}) {
         var text=await getUsername();
         setUsername(text);
         setIsUserLogedIn(text===undefined?false:true);
+        var id=await getId();
+        setId(id);
+        var name=await getName();
+        setName(name);
+        var password=await getPassword();
+        setPassword(password);
     })()
 }, [])
 

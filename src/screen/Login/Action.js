@@ -38,6 +38,16 @@ export const getUsername = async () => {
     }
   };
 
+export const getPassword = async () => {
+    try {
+          const {password}  = await Keychain.getGenericPassword({service:"userCredentials"});
+          return password;
+    } catch (error) {
+      console.error('Error retrieving data:', error);
+      return null;
+    }
+  };  
+
 export const getId = async () => {
     try {
           const {password}= await Keychain.getGenericPassword({service:"userAdditional"});
