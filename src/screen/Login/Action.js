@@ -16,27 +16,21 @@ export const signUpUser = async reqData => {
 // singin user
 export const signInUser = async reqData => {
     try {
-     
             const response = await api.post('/users/login', reqData);
             const {id, name, password,username} = response.data;
          
-            //console.log('Id:' + id);
-            //console.log('Name:' + name);
-            //console.log('Username:' + username);
-            //console.log('password:' + password);
-
             // Store the credentials
-            await Keychain.setGenericPassword(username, password);   
-
+            await Keychain.setGenericPassword(username, password,{service:"userCredentials"});
+            await Keychain.setGenericPassword(name, JSON.stringify(id),{service:"userAdditional"});
+          
     } catch (error) {
       console.error('Error signing in user:', error,reqData);
     }
   };
-
   
-  export const getUsername = async () => {
+export const getUsername = async () => {
     try {
-          const {username}  = await Keychain.getGenericPassword();
+          const {username}  = await Keychain.getGenericPassword({service:"userCredentials"});
           return username;
     } catch (error) {
       console.error('Error retrieving data:', error);
@@ -44,10 +38,29 @@ export const signInUser = async reqData => {
     }
   };
 
+export const getId = async () => {
+    try {
+          const {password}= await Keychain.getGenericPassword({service:"userAdditional"});
+          return password;
+    } catch (error) {
+      console.error('Error retrieving data:', error);
+      return null;
+    }
+  };
 
-  export const logoutUserAction = async () => {
-   
-    await Keychain.resetGenericPassword();   
-    console.log('logout user');
+export const getName = async () => {
+    try {
+          const {username}= await Keychain.getGenericPassword({service:"userAdditional"});
+          return username;
+    } catch (error) {
+      console.error('Error retrieving data:', error);
+      return null;
+    }
+  };
+
+export const logoutUserAction = async () => {
   
+    await Keychain.resetGenericPassword({service:"userCredentials"}); 
+    await Keychain.resetGenericPassword({service:"userAdditional"}); 
+    
   };

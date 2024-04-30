@@ -20,14 +20,14 @@ export default function CreateMovieForm() {
   const [dateString,setDateString]=useState('');
   const [isReadOnly,setIsReadOnly]=useState(false);
   const [isUserLogedIn,setIsUserLogedIn]=useState(false);
-
+  
   useEffect( () => {
     (async()=>{
         var text=await getUsername();
         setIsUserLogedIn(text===undefined?false:true);
         setIsReadOnly(text===undefined?true:false);
     })()
-}, [])
+  }, [])
 
   const handleInputChange=(key,value)=>{
     if(key=='name')setName(value);
