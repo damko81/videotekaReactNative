@@ -1,4 +1,4 @@
-import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { getId, getName, getPassword, getUsername, logoutUserAction, updateUserAction } from '../Login/Action';
@@ -36,18 +36,34 @@ export default function ProfileScreen({navigation}) {
    setUsername("username");
    navigation.navigate('Login');
  }
+
  const handleUpdate=()=>{
   
   var values = {
                   id:id,
                   name:name,
                   username:username,
-                  password:(newPassword != null || newPassword != '')?newPassword:password
+                  password:(newPassword != null && newPassword != '')?newPassword:password
                };
 
   updateUserAction(values);
   handleLogout();
 }
+
+const updateDialog = () =>
+Alert.alert(
+  "Confirm Operation",
+  "Are you sure you want to update this profile?",
+  [{ text: "Cancel",
+     onPress: () => console.log('Cancel Pressed'),
+     style: 'cancel'
+   },
+   { text: "Yes",
+     onPress: () => handleUpdate()
+   }
+  ]
+);
+
  const handleLogin=()=>{
   navigation.navigate('Login');
 }
@@ -102,7 +118,7 @@ export default function ProfileScreen({navigation}) {
                     </View>
                   }
                   {isUserLogedIn && isEditeUsername &&
-                    <TouchableOpacity onPress={handleUpdate} style={styles.logoutButton}>
+                    <TouchableOpacity onPress={updateDialog} style={styles.logoutButton}>
                       <Text style={styles.logoutText}>
                         Update
                       </Text>
