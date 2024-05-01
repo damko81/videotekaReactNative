@@ -126,6 +126,12 @@ export const getMovies = () => {
     const res= await api.post('/movie/add',movie);
     return res;
   };
+  
+  export const loadMovies = async (disc) => {
+    var discTmp = disc.replace(/\\/g, '!');
+    const res= await api.post(`/movie/mobileLoad/${discTmp}`)
+    return res;
+  };
 
   export const deleteMovie = async (id) => {
     const res= await api.delete(`/movie/delete/${id}`);
