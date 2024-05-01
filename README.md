@@ -16,6 +16,10 @@ As Loged user can use writeble actions:
 
 ![image](https://github.com/damko81/videotekaReactNative/assets/162964541/66fd0fbb-a52a-4205-865e-8502b6db3523)
 
+Load or Delete movies from choosen disc:
+
+![image](https://github.com/damko81/videotekaReactNative/assets/162964541/e226b0db-01c8-41cc-b780-6dd1d867e32a)
+
 Create new movie:
 
 ![image](https://github.com/damko81/videotekaReactNative/assets/162964541/40212cf2-8c9c-4a95-95dc-4f4e7b7b5665)
