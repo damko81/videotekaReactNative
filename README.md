@@ -1,21 +1,43 @@
 React Native Android Videoteca
 
-List of movies:
+Login page:
 
-![image](https://github.com/damko81/videotekaReactNative/assets/162964541/f8f5c98d-1893-41f0-ab0a-010e9ae8d3db)
+![image](https://github.com/damko81/videotekaReactNative/assets/162964541/094afb86-ef5b-46c9-857f-54879b4eb8db)
+
+You can go to Videoteca list as nonregistered user with readonly actions - grey colored:
+
+![image](https://github.com/damko81/videotekaReactNative/assets/162964541/3da2a1dd-4e04-46a8-9f1c-e5e25a9dcec5)
+
+Show form:
+
+![image](https://github.com/damko81/videotekaReactNative/assets/162964541/b7821cd5-93b2-4b94-a198-f93941b7b3a5)
+
+As Loged user can use writeble actions:
+
+![image](https://github.com/damko81/videotekaReactNative/assets/162964541/66fd0fbb-a52a-4205-865e-8502b6db3523)
 
 Create new movie:
 
 ![image](https://github.com/damko81/videotekaReactNative/assets/162964541/40212cf2-8c9c-4a95-95dc-4f4e7b7b5665)
 
 
-Show/Update movie:
+Update movie:
 
-![image](https://github.com/damko81/videotekaReactNative/assets/162964541/a3b9bdce-0dab-4f60-9aa5-517c3513bbf5)
+![image](https://github.com/damko81/videotekaReactNative/assets/162964541/60cc6307-7e75-4e60-bb54-88082972af2c)
 
-Login:
 
-![image](https://github.com/damko81/videotekaReactNative/assets/162964541/1c359fe9-2787-4de0-b713-e4e5507d7e2c)
+Delete:
+
+![image](https://github.com/damko81/videotekaReactNative/assets/162964541/43b343e1-c765-4840-ad74-2d3aebe43a32)
+
+SignUp new user:
+
+![image](https://github.com/damko81/videotekaReactNative/assets/162964541/8376ba17-0d83-4c85-a0f9-f4d329b597fd)
+
+Managing user profil:
+
+![image](https://github.com/damko81/videotekaReactNative/assets/162964541/ce0325ae-e411-461a-9b45-dcc849fa8dc0)
+
 
 
 
