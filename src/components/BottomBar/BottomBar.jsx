@@ -27,7 +27,7 @@ const BottomBar = () => {
           <Icon name="plus" size={24} color="#fff" />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setOpenLoadMovies(!openLoadMovies)}>
-          <Icon name="gear" size={24} color="#fff" />
+          <Icon name="arrow-circle-o-down" size={24} color="#fff" />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigateToScreen('Profile')}>
           <Icon name="user" size={24} color="#fff" />
