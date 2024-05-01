@@ -133,6 +133,12 @@ export const getMovies = () => {
     return res;
   };
 
+  export const deleteMovieByDisc = async (disc) => {
+    var discTmp = disc.replace(/\\/g, '!');
+    const res= await api.delete(`/movie/deleteMovieByDisc/${discTmp}`)
+    return res;
+  };
+
   export const deleteMovie = async (id) => {
     const res= await api.delete(`/movie/delete/${id}`);
     return res;

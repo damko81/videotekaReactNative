@@ -1,13 +1,15 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getUsername } from '../../screen/Login/Action';
-import { loadMovies } from '../Movie/Action';
+import { deleteMovieByDisc, loadMovies } from '../Movie/Action';
 
 export default function LoadMoviesForm() {
 
   const [disc,setDisc]=useState('');  
   const [isReadOnly,setIsReadOnly]=useState(false);
   const [isUserLogedIn,setIsUserLogedIn]=useState(false);
+  const [showLoadedMovies,setShowLoadedMovies]=useState(true);
+  const [showDeletedMovies,setShowDeletedMovies]=useState(true);
 
   useEffect( () => {
     (async()=>{
@@ -25,11 +27,33 @@ export default function LoadMoviesForm() {
 
     loadMovies(disc); // Shranimo v backend DB.
     setIsReadOnly(true);
+    setShowDeletedMovies(false);
   };
+
+  const handleDeleteMovieByDisc=()=>{
+
+    deleteMovieByDisc(disc); // Shranimo v backend DB.
+    setIsReadOnly(true);
+    setShowLoadedMovies(false);
+  };
+
+  const deleteMovieByDiscDialog = () =>
+    Alert.alert(
+      "Confirm Operation",
+      "Are you sure you want to delete movies?",
+      [{ text: "Cancel",
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel'
+      },
+      { text: "Yes",
+        onPress: () => handleDeleteMovieByDisc()
+      }
+      ]
+    );
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Load Movies</Text>
+      <Text style={styles.heading}>Load/Delete Movies</Text>
       <View>
                 <View style={styles.inputWrapper}>
                     <Text style={styles.taskMovie}>Disc</Text>
@@ -44,11 +68,20 @@ export default function LoadMoviesForm() {
                 </View>
       </View>
       <View style={styles.inputWrapper}>
+        {showLoadedMovies &&
         <TouchableOpacity disabled={isReadOnly} onPress={handleLoadMovies} style={[styles.loadMoviesButton,{backgroundColor:isReadOnly?'#758AA2':'#1FAA59'}]}>
             <Text style={styles.loadMoviesButtonText}>
                 {isReadOnly && isUserLogedIn?'MOVIES SUCCESSFULLY LOADED':'LOAD MOVIES'}
             </Text>
         </TouchableOpacity>
+        } 
+        {showDeletedMovies &&
+        <TouchableOpacity disabled={isReadOnly} onPress={deleteMovieByDiscDialog} style={[styles.deleteMoviesButton,{backgroundColor:isReadOnly?'#758AA2':'#E6425E'}]}>
+            <Text style={styles.deleteMoviesButtonText}>
+                {isReadOnly && isUserLogedIn?'MOVIES SUCCESSFULLY DELETED':'DELETE MOVIES'}
+            </Text>
+        </TouchableOpacity>
+        }
       </View>
     </View>
   )
@@ -129,5 +162,17 @@ const styles = StyleSheet.create({
         marginLeft:5,
         paddingVertical:15,
         borderRadius:5
-    }
+    },
+    deleteMoviesButtonText: {
+      color:'white',
+      textAlign:'center',
+      fontWeight:"bold"
+  },
+  deleteMoviesButton: {
+      backgroundColor:'#E6425E',
+      marginLeft:5,
+      marginTop:5,
+      paddingVertical:15,
+      borderRadius:5
+  }
   });
