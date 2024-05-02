@@ -6,7 +6,8 @@ Login page:
 
 You can go to Videoteca list as nonregistered user with readonly actions - grey colored:
 
-![image](https://github.com/damko81/videotekaReactNative/assets/162964541/3da2a1dd-4e04-46a8-9f1c-e5e25a9dcec5)
+![image](https://github.com/damko81/videotekaReactNative/assets/162964541/320747c6-dbf2-40b1-a2d6-e9496f6032b0)
+
 
 Show form:
 
