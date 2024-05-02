@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react';
+import React, {useState} from 'react';
 import {View, TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { CreateMovieForm } from '../CreateMovieForm';
@@ -14,12 +14,20 @@ const BottomBar = () => {
     navigation.navigate(screenName);
   };
 
+  const setRefresh = () => {
+    navigation.navigate('Login');
+    navigation.navigate('Home');
+  };
+  
   const closeOpenCreateMovie=()=>setOpenCreateMovie(false);
   const closeOpenLoadMovies=()=>setOpenLoadMovies(false);
 
   return (
     <View>
       <View style={styles.container}>
+        <TouchableOpacity onPress={() => setRefresh()}>
+          <Icon name="refresh" size={24} color="#fff" />
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => navigateToScreen('Home')}>
           <Icon name="home" size={24} color="#fff" />
         </TouchableOpacity>
